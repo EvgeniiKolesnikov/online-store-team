@@ -7,27 +7,10 @@
   padding: 0;
 }
 
-body {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: darkslategrey;
-  color: white;
-  font-size: 14px;
-  font-family: "Roboto", sans-serif;
-}
-
-.page {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-width: 360px;
-  max-width: 1600px;
-  width: 100%;
-  min-height: 100vh;
-}
-
-@import "scss/header";
-@import "scss/menu";
+@import "scss/blocks/page";
+@import "scss/blocks/header";
+@import "scss/blocks/main";
+@import "scss/blocks/aside";
+@import "scss/blocks/content";
+@import "scss/blocks/products";
+@import "scss/blocks/card";

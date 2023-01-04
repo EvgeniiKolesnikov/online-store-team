@@ -32,7 +32,7 @@ export class Router {
     if (ActiveRoute.path.includes('cart')) Page = this.routes.cart;
     if (ActiveRoute.path.includes('prod')) {
       Page = this.routes.prod;
-      console.log(Number(ActiveRoute.param));
+      // console.log(Number(ActiveRoute.param));
       if ((Number(ActiveRoute.param) === 0) || (isNaN(Number(ActiveRoute.param)))) {
         Page = this.routes.page404;
       }
