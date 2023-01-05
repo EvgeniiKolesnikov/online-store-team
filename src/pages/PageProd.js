@@ -1,4 +1,5 @@
 import { Page } from '../core/Page';
+
 // import { Menu } from '../components/menu/Menu';
 
 export class PageProd extends Page {
@@ -27,13 +28,18 @@ export class PageProd extends Page {
 
   toHTML() {
     return `
-  <header class="header">
-  </header>
-  <main class="main">
-   <h1>Страница с описанием товара id ${this.prodID}</h1>
-  </main>
-  <footer class="footer">
-  </footer>
+      <header class="header">
+        <a href="#index" class="header__logo">Online store</a>
+        <a href="#cart" class="header__cart">Карзина
+          <div class="header__cart-num">0</div>
+          <div class="header__cart-sum">0</div>
+        </a>
+      </header>
+      <main class="main">
+      <h1>Страница с описанием товара id ${this.prodID}</h1>
+      </main>
+      <footer class="footer">
+      </footer>
     `;
   }
 }

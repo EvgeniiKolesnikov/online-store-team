@@ -1,0 +1,17 @@
+.page {
+  display: flex;
+  min-width: 360px;
+  max-width: 1600px;
+  width: 100%;
+  min-height: 100vh;
+  flex-direction: column;
+  margin: 0 auto;
+  background-color: #333;
+  color: white;
+  font-size: 14px;
+  font-family: "Roboto", sans-serif;
+
+  &__index {
+
+  }
+}

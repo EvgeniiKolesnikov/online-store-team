@@ -1,7 +1,7 @@
 {
-  "name": "songbird",
+  "name": "online-store",
   "version": "0.0.0",
-  "description": "songbird",
+  "description": "online-store",
   "private": true,
   "scripts": {
     "build": "webpack",
