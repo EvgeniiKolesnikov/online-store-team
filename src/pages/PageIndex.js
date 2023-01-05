@@ -1,5 +1,6 @@
 import { Page } from '../core/Page';
 import { Products } from '../components/products/Products';
+import { Cart } from '../components/cart/Cart';
 
 export class PageIndex extends Page {
   constructor(root, args) {
@@ -9,7 +10,6 @@ export class PageIndex extends Page {
     });
     this.observer = args.observer;
     this.model = args.model;
-    // this.components = {};
   }
 
   render() {
@@ -21,19 +21,22 @@ export class PageIndex extends Page {
       observer: this.observer,
       model: this.model,
     };
+
+    new Cart('.header__cart', {
+      observer: this.observer,
+      model: this.model,
+    });
+
     new Products('.content', {
       observer: this.observer,
       model: this.model,
     });
   }
 
-  toHTML() {
-    return `
+  toHTML = () => `
   <header class="header">
     <a href="#index" class="header__logo">Online store</a>
-    <a href="#cart" class="header__cart">Карзина
-      <div class="header__cart-num">0</div>
-      <div class="header__cart-sum">0</div>
+    <a href="#cart" class="header__cart">Корзина
     </a>
   </header>
   <main class="main">
@@ -46,5 +49,4 @@ export class PageIndex extends Page {
   <footer class="footer">
   </footer>
   `;
-  }
 }
