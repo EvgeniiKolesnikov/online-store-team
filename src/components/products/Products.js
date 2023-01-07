@@ -7,6 +7,7 @@ export class Products extends Component {
       listeners: ['click'],
       ...options,
     });
+
     this.model = options.model;
     this.render(this.root);
   }
@@ -25,6 +26,7 @@ export class Products extends Component {
   onClick(event) {
     if (event.target.dataset.id) {
       console.log(`Кладем в карзину товар с id = ${event.target.dataset.id}`);
+      this.observer.notification('add-product', { id: event.target.dataset.id });
     }
   }
 

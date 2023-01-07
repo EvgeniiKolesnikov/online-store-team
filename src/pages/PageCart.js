@@ -8,7 +8,7 @@ export class PageCart extends Page {
       ...args,
     });
     this.observer = args.observer;
-    // this.model = args.model;
+    this.model = args.model;
   }
 
   render() {
@@ -16,22 +16,23 @@ export class PageCart extends Page {
     div.classList.add('page');
     div.innerHTML = this.toHTML();
     this.root.append(div);
-    const opt = {
-      observer: this.observer,
-      model: this.model,
-    };
-    // new Menu('nav', opt);
   }
 
   toHTML() {
+    let list = '';
+    for (const key in this.model.cart) {
+       list += (`<h2>Товар с id =${key} в количестве ${this.model.cart[key]} шт.</h2>`);
+    }
+
     return `
-  <header class="header">
-  </header>
-  <main class="main">
-   <h1>Страница корзины выбранных товаров</h1>
-  </main>
-  <footer class="footer">
-  </footer>
+      <header class="header">
+      </header>
+      <main>
+       <h1>Страница корзины выбранных товаров</h1>
+       <div>${list}</div>
+      </main>
+      <footer class="footer">
+      </footer>
     `;
   }
 }
