@@ -26,6 +26,15 @@ export class Model {
       this.productSum += this.products[product.id].price;
       storage('cart', { prods: this.cart, prodsCount: this.productCount, prodsSum: this.productSum });
     });
+
+    this.observer.subscribe('drop-product', (product) => {
+      if (this.cart[product.id] !== undefined) {
+        this.productCount--;
+        this.productSum -= this.products[product.id].price * this.cart[product.id];
+        delete this.cart[product.id];
+      }
+      storage('cart', { prods: this.cart, prodsCount: this.productCount, prodsSum: this.productSum });
+    });
   }
 
   getProductID(id) {

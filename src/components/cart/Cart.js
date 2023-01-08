@@ -24,11 +24,16 @@ export class Cart extends Component {
     const sum = this.root.querySelector('.header__cart-sum');
 
     num.innerText = this.model.getProductCount();
-    sum.innerText = `${this.model.getProductSum()} $`;
+    sum.innerText = `$${this.model.getProductSum()}`;
 
     this.observer.subscribe('add-product', (product) => {
       num.innerText = this.model.getProductCount();
-      sum.innerText = `${this.model.getProductSum()} $`;
+      sum.innerText = ` $${this.model.getProductSum()}`;
+    });
+
+    this.observer.subscribe('drop-product', (product) => {
+      num.innerText = this.model.getProductCount();
+      sum.innerText = ` $${this.model.getProductSum()}`;
     });
   }
 
