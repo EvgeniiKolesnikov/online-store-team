@@ -1,0 +1,14 @@
+.menu {
+  display: flex;
+  list-style-type: none;
+
+  &__item {
+  padding: 10px;
+
+    &:hover{
+      cursor: pointer;
+      color: red;
+      transition: all 500ms;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+@import "~normalize.css";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@import "scss/blocks/page";
+@import "scss/blocks/header";
+@import "scss/blocks/main";
+@import "scss/blocks/aside";
+@import "scss/blocks/content";
+@import "scss/blocks/products";
+@import "scss/blocks/product";
+@import "scss/blocks/card";
