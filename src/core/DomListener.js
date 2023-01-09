@@ -14,6 +14,9 @@ export class DomListener {
   initDOMListeners() {
     this.listeners.forEach((listener) => {
       const method = getMethodName(listener);
+      // console.log('listener =', listener);  listener = click
+      // console.log('method =', method); method = onClick
+
       if (!this[method]) {
         const name = this.name || '';
         throw new Error(

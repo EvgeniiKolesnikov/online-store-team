@@ -1,10 +1,22 @@
 import { Page } from '../core/Page';
 import { Cart } from '../components/cart/Cart';
+import { PageProdOptions } from '../types/appTypes';
+import { Observer } from '../core/Observer';
+import { Model } from '../core/Model';
+import { Product } from '../types/dataTypes';
 
 // import { Menu } from '../components/menu/Menu';
 
 export class PageProd extends Page {
-  constructor(root, args) {
+  observer: Observer;
+
+  model: Model;
+
+  prodID: number;
+
+  good: Product | null;
+
+  constructor(root: string, args: PageProdOptions) {
     super(root, {
       name: 'PageProd',
       listeners: ['click'],
@@ -14,64 +26,69 @@ export class PageProd extends Page {
     this.model = args.model;
     this.prodID = args.prodID;
     this.good = (
-      this.model.products.filter((good) => good.id === +this.prodID)[0] || null);
-    this.counter = 0;
+      this.model.products.filter((good: Product) => good.id === +this.prodID)[0] || null);
   }
 
-  render() {
-    const div = document.createElement('div');
+  public render(): void {
+    const div: HTMLElement | null = document.createElement('div') as HTMLElement;
     div.classList.add('page-product');
     div.innerHTML = this.toHTML();
-    this.root.append(div);
+    (<HTMLElement> this.root).append(div);
     console.log(this.good);
 
-    new Cart('.header__cart', {
+    const cart = new Cart('.header__cart', {
       observer: this.observer,
       model: this.model,
     });
   }
 
-  checkCart() {
-    return this.model.cart[+this.prodID] !== undefined;
+  checkCart(): boolean {
+    return this.model.cart[Number(this.prodID)] !== undefined;
   }
 
-  getButtonText() {
+  getButtonText(): string {
     return this.checkCart() ? 'Drop from cart' : 'Add to cart';
   }
 
-  onClick(event) {
-    this.counter++;
-    console.log('this.counter =', this.counter);
+  onClick(event: MouseEvent): void {
     // click photos
-    if (event.target.matches('.product-photo-slide')) {
-      document.querySelector('.product-photo-big').src = event.target.src;
+    const elem = event.target as HTMLElement;
+
+    if (elem && elem.matches('.product-photo-slide')) {
+      const slide = event.target as HTMLImageElement;
+      const bigPhoto = document.querySelector('.product-photo-big') as HTMLImageElement;
+      if (slide && bigPhoto) {
+        bigPhoto.src = slide.src;
+      }
     }
 
     // click "add to cart" button
-    if (event.target.matches('.product-button-add')) {
+    if ((elem).matches('.product-button-add') && this.good) {
       if (this.checkCart()) {
-        console.log(`Good already in cart. DROP from cart`);
+        console.log('Good already in cart. DROP from cart');
         this.observer.notification('drop-product', { id: this.good.id });
       } else {
-        console.log(`ADD to cart`);
+        console.log('ADD to cart');
         this.observer.notification('add-product', { id: this.good.id });
       }
-      event.target.textContent = this.getButtonText();
+      elem.textContent = this.getButtonText();
     }
 
     // click "buy now" button
-    if (event.target.matches('.product-button-buy')) {
+    if (elem.matches('.product-button-buy') && this.good) {
       if (this.checkCart()) {
-        console.log(`Good already in cart. Buy now`);
+        console.log('Good already in cart. Buy now');
       } else {
-        console.log(`Buy now. Add to cart`);
+        console.log('Buy now. Add to cart');
         this.observer.notification('add-product', { id: this.good.id });
       }
-      document.querySelector('.product-button-add').textContent = this.getButtonText();
+      (<HTMLElement>document.querySelector('.product-button-add')).textContent = this.getButtonText();
     }
   }
 
   toHTML() {
+    if (!this.good) return '';
+
     return `
       <header class="header">
         <a href="#index" class="header__logo">Online store</a>

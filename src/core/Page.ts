@@ -1,20 +1,20 @@
 import { DomListener } from './DomListener';
 
 export class Page extends DomListener {
-  constructor(root, args = {}) {
+  constructor(root: string | HTMLElement, args = {}) {
     super(root, args.listeners);
     this.root = root;
     this.name = args.name || '';
     this.observer = args.observer;
   }
 
-  toHTML() {
-    return '';
-  }
+  // toHTML(): string {
+  //   return '';
+  // }
 
-  render() {
-    throw new Error('Method "render" should be implemented');
-  }
+  // render(): void {
+  //   throw new Error('Method "render" should be implemented');
+  // }
 
   afterRender() {
     // console.log('afterRender()');
