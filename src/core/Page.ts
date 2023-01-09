@@ -1,7 +1,13 @@
+import { PageOptions } from '../types/appTypes';
 import { DomListener } from './DomListener';
+import { Observer } from './Observer';
 
 export class Page extends DomListener {
-  constructor(root: string | HTMLElement, args = {}) {
+  public name: string;
+
+  public observer: Observer;
+
+  constructor(root: string | HTMLElement, args: PageOptions) {
     super(root, args.listeners);
     this.root = root;
     this.name = args.name || '';
@@ -22,8 +28,7 @@ export class Page extends DomListener {
   }
 
   destroy() {
-    console.log('PAGE destroy() ====================================');
-    this.root.innerHTML = '';
+    (<HTMLElement> this.root).innerHTML = '';
     this.removeDOMListeners();
   }
 }

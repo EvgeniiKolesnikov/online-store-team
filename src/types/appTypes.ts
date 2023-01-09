@@ -38,8 +38,8 @@ export type CartOptions = {
 };
 
 export type PageOptions = {
-  // name: string;
-  // listeners?: string[];
+  name: string;
+  listeners?: string[];
   model: Model;
   observer: Observer;
 };
