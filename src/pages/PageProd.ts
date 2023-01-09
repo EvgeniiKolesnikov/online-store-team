@@ -1,10 +1,22 @@
 import { Page } from '../core/Page';
 import { Cart } from '../components/cart/Cart';
+import { PageProdOptions } from '../types/appTypes';
+import { Observer } from '../core/Observer';
+import { Model } from '../core/Model';
+import { Product } from '../types/dataTypes';
 
 // import { Menu } from '../components/menu/Menu';
 
 export class PageProd extends Page {
-  constructor(root, args) {
+  observer: Observer;
+
+  model: Model;
+
+  prodID: number;
+
+  good: Product | null;
+
+  constructor(root: string, args: PageProdOptions) {
     super(root, {
       name: 'PageProd',
       listeners: ['click'],
@@ -14,12 +26,11 @@ export class PageProd extends Page {
     this.model = args.model;
     this.prodID = args.prodID;
     this.good = (
-      this.model.products.filter((good) => good.id === +this.prodID)[0] || null);
-    this.counter = 0;
+      this.model.products.filter((good: Product) => good.id === +this.prodID)[0] || null);
   }
 
-  render() {
-    const div = document.createElement('div');
+  public render(): void {
+    const div: HTMLElement | null = document.createElement('div') as HTMLElement;
     div.classList.add('page-product');
     div.innerHTML = this.toHTML();
     this.root.append(div);
@@ -31,20 +42,24 @@ export class PageProd extends Page {
     });
   }
 
-  checkCart() {
-    return this.model.cart[+this.prodID] !== undefined;
+  checkCart(): boolean {
+    return this.model.cart[Number(this.prodID)] !== undefined;
   }
 
-  getButtonText() {
+  getButtonText(): string {
     return this.checkCart() ? 'Drop from cart' : 'Add to cart';
   }
 
-  onClick(event) {
-    this.counter++;
-    console.log('this.counter =', this.counter);
+  onClick(event: MouseEvent): void {
     // click photos
-    if (event.target.matches('.product-photo-slide')) {
-      document.querySelector('.product-photo-big').src = event.target.src;
+    const elem = event.target as HTMLElement;
+
+    if (elem && elem.matches('.product-photo-slide')) {
+      const slide = event.target as HTMLImageElement;
+      const bigPhoto = document.querySelector('.product-photo-big') as HTMLImageElement;
+      if (slide && bigPhoto) {
+        bigPhoto.src = slide.src;
+      }
     }
 
     // click "add to cart" button

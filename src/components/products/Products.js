@@ -23,7 +23,8 @@ export class Products extends Component {
     super.init();
   }
 
-  onClick(event) {
+  // onClick(event) {
+  onClick = (event) => {
     if (event.target.dataset.id) {
       console.log(`Кладем в карзину товар с id = ${event.target.dataset.id}`);
       this.observer.notification('add-product', { id: event.target.dataset.id });
