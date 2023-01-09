@@ -33,10 +33,10 @@ export class PageProd extends Page {
     const div: HTMLElement | null = document.createElement('div') as HTMLElement;
     div.classList.add('page-product');
     div.innerHTML = this.toHTML();
-    this.root.append(div);
+    (<HTMLElement> this.root).append(div);
     console.log(this.good);
 
-    new Cart('.header__cart', {
+    const cart = new Cart('.header__cart', {
       observer: this.observer,
       model: this.model,
     });
@@ -63,30 +63,32 @@ export class PageProd extends Page {
     }
 
     // click "add to cart" button
-    if (event.target.matches('.product-button-add')) {
+    if ((elem).matches('.product-button-add') && this.good) {
       if (this.checkCart()) {
-        console.log(`Good already in cart. DROP from cart`);
+        console.log('Good already in cart. DROP from cart');
         this.observer.notification('drop-product', { id: this.good.id });
       } else {
-        console.log(`ADD to cart`);
+        console.log('ADD to cart');
         this.observer.notification('add-product', { id: this.good.id });
       }
-      event.target.textContent = this.getButtonText();
+      elem.textContent = this.getButtonText();
     }
 
     // click "buy now" button
-    if (event.target.matches('.product-button-buy')) {
+    if (elem.matches('.product-button-buy') && this.good) {
       if (this.checkCart()) {
-        console.log(`Good already in cart. Buy now`);
+        console.log('Good already in cart. Buy now');
       } else {
-        console.log(`Buy now. Add to cart`);
+        console.log('Buy now. Add to cart');
         this.observer.notification('add-product', { id: this.good.id });
       }
-      document.querySelector('.product-button-add').textContent = this.getButtonText();
+      (<HTMLElement>document.querySelector('.product-button-add')).textContent = this.getButtonText();
     }
   }
 
   toHTML() {
+    if (!this.good) return '';
+
     return `
       <header class="header">
         <a href="#index" class="header__logo">Online store</a>

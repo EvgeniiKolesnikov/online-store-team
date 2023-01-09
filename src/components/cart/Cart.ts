@@ -36,12 +36,12 @@ export class Cart extends Component {
     num.innerText = `${this.model.getProductCount()}`;
     sum.innerText = `$${this.model.getProductSum()}`;
 
-    this.observer.subscribe('add-product', (product: Product) => {
+    this.observer.subscribe('add-product', (id: number) => {
       num.innerText = `${this.model.getProductCount()}`;
       sum.innerText = `$${this.model.getProductSum()}`;
     });
 
-    this.observer.subscribe('drop-product', (product: Product) => {
+    this.observer.subscribe('drop-product', (id: number) => {
       num.innerText = `${this.model.getProductCount()}`;
       sum.innerText = `$${this.model.getProductSum()}`;
     });

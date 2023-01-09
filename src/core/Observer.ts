@@ -3,7 +3,7 @@ export class Observer {
     this.listeners = {};
   }
 
-  notification(eventName, ...args) {
+  notification(eventName: string, ...args) {
     if (!Array.isArray(this.listeners[eventName])) return false;
 
     this.listeners[eventName].forEach((listener) => {
@@ -13,7 +13,7 @@ export class Observer {
     return true;
   }
 
-  subscribe(eventName, fn) {
+  subscribe(eventName: string, fn) {
     this.listeners[eventName] = this.listeners[eventName] || [];
     this.listeners[eventName].push(fn);
     return () => {

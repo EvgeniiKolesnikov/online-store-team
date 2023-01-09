@@ -1,39 +1,46 @@
 import { Page } from '../core/Page';
 import { Products } from '../components/products/Products';
 import { Cart } from '../components/cart/Cart';
+import { PageOptions } from '../types/appTypes';
+import { Observer } from '../core/Observer';
+import { Model } from '../core/Model';
 
 export class PageIndex extends Page {
-  constructor(root, args) {
+  public root: HTMLElement | string;
+
+  public observer: Observer;
+
+  public model: Model;
+
+  constructor(root: HTMLElement | string, args: PageOptions) {
     super(root, {
       name: 'PageIndex',
       ...args,
     });
+    this.root = root;
     this.observer = args.observer;
     this.model = args.model;
   }
 
-  render() {
+  render(): void {
     const div = document.createElement('div');
     div.classList.add('page__index');
     div.innerHTML = this.toHTML();
-    this.root.append(div);
+    (this.root as HTMLElement).append(div);
+
     const opt = {
       observer: this.observer,
       model: this.model,
     };
 
-    new Cart('.header__cart', {
-      observer: this.observer,
-      model: this.model,
-    });
+    // eslint-disable-next-line no-new
+    new Cart('.header__cart', opt);
 
-    new Products('.content', {
-      observer: this.observer,
-      model: this.model,
-    });
+    // eslint-disable-next-line no-new
+    new Products('.content', opt);
   }
 
-  toHTML = () => `
+  toHTML = (): string => `
   <header class="header">
     <a href="#index" class="header__logo">Online store</a>
     <a href="#cart" class="header__cart">Корзина

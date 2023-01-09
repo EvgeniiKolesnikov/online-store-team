@@ -37,6 +37,13 @@ export type CartOptions = {
   observer: Observer;
 };
 
+export type PageOptions = {
+  // name: string;
+  // listeners?: string[];
+  model: Model;
+  observer: Observer;
+};
+
 export type CartType = {
   prods?: Prods[];
   prodsCount?: number;

@@ -1,3 +1,4 @@
+import { Cart } from '../components/cart/Cart';
 import { Model } from '../core/Model';
 import { Observer } from '../core/Observer';
 import { Page } from '../core/Page';
@@ -26,24 +27,37 @@ export class PageCart extends Page {
     div.classList.add('page');
     div.innerHTML = this.toHTML();
     this.root.append(div);
+
+    const cart = new Cart('.header__cart', {
+      observer: this.observer,
+      model: this.model,
+    });
   }
 
   toHTML(): string {
     let list = '';
-    if (this.model.cart.prods) {
-      list = Object.keys(this.model.cart.prods)
-        .map((key) => `<div>id: ${key} count: ${this.model.cart.prods[key]}</div>`)
-        .join('');
-    }
+
+    // if (this.model.cart?.prods) {
+    //   list = Object.keys(this.model.cart.prods)
+    //     .map((key) => `<div>id: ${key} count: ${this.model.cart.prods[key]}</div>`)
+    //     .join('');
+    // }
+
     return `
-      <header class="header">
-      </header>
-      <main>
-       <h1>Страница корзины выбранных товаров</h1>
-       <div>${list}</div>
-      </main>
-      <footer class="footer">
-      </footer>
+    <header class="header">
+      <a href="#index" class="header__logo">Online store</a>
+      <a href="#cart" class="header__cart">
+      </a>
+    </header>
+
+    <main class="main">
+      <div class="cart-details">
+        <div class="cart-title">Cart</div>
+        <div>${list}</div>
+      </div>
+    </main>
+
+    <footer class="footer"></footer>
     `;
   }
 }

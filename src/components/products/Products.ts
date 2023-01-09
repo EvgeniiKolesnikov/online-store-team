@@ -47,7 +47,7 @@ export class Products extends Component {
       if (target?.dataset?.id) {
         console.log(`Add good to cart. ProdId = ${target?.dataset?.id}`);
         this.observer.notification('add-product', {
-          id: target.dataset.id,
+          id: +target.dataset.id,
         });
       }
     }
