@@ -6,7 +6,7 @@ import { Observer } from './Observer';
 import { storage } from './storage';
 
 type Opt = {
-  observer?: Observer | undefined
+  observer?: Observer | undefined;
 };
 
 export class Model {
@@ -20,7 +20,7 @@ export class Model {
 
   productSum: number | undefined;
 
-  constructor(opt: Opt = { }) {
+  constructor(opt: Opt = {}) {
     this.observer = opt.observer;
     this.products = data.products;
     this.cart = {};
@@ -38,35 +38,39 @@ export class Model {
       this.productSum = storageData.prodsSum;
     }
 
-    this.observer.subscribe('add-product', (product: Product) => {
-      console.log('product.id = ', product.id);
+    if (this.observer instanceof Observer) {
+      this.observer.subscribe('add-product', (product: Product) => {
+        console.log('add-product product = ', product);
+        console.log('product.id = ', product.id);
 
-      if (this.cart[product.id] === undefined) this.cart[product.id] = 0;
-      this.cart[product.id]++;
-      this.productCount++;
-      this.productSum += this.products[product.id].price;
-      storage('cart', {
-        prods: this.cart.prods,
-        prodsCount: this.productCount,
-        prodsSum: this.productSum,
+        if (this.cart[product.id] === undefined) this.cart[product.id] = 0;
+        this.cart[product.id]++;
+        this.productCount++;
+        this.productSum += this.products[product.id].price;
+        storage('cart', {
+          prods: this.cart.prods,
+          prodsCount: this.productCount,
+          prodsSum: this.productSum,
+        });
       });
-    });
 
-    this.observer.subscribe('drop-product', (product: Product) => {
-      if (this.cart[product.id] !== undefined) {
-        this.productCount--;
-        this.productSum -=
-          this.products[product.id].price * this.cart[product.id];
-        delete this.cart[product.id];
-      }
-      storage('cart', {
-        prods: this.cart.prods,
-        prodsCount: this.productCount,
-        prodsSum: this.productSum,
+      this.observer.subscribe('drop-product', (product: Product) => {
+        console.log('drop-product product = ', product);
+        console.log('product.id = ', product.id);
+        if (this.cart[product.id] !== undefined) {
+          this.productCount--;
+          this.productSum -=
+            this.products[product.id].price * this.cart[product.id];
+          delete this.cart[product.id];
+        }
+        storage('cart', {
+          prods: this.cart.prods,
+          prodsCount: this.productCount,
+          prodsSum: this.productSum,
+        });
       });
-    });
+    }
   }
-
   public getProductID(id: number): Product {
     return this.products[id];
   }

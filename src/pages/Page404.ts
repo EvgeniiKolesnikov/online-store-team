@@ -1,8 +1,8 @@
 import { Page } from '../core/Page';
-// import { Menu } from '../components/menu/Menu';
+import { Page404Options } from '../types/appTypes';
 
 export class Page404 extends Page {
-  constructor(root: string, args) {
+  constructor(root: string, args:Page404Options) {
     super(root, {
       name: 'Page404',
       ...args,
@@ -20,7 +20,6 @@ export class Page404 extends Page {
       observer: this.observer,
       model: this.model,
     };
-    // new Menu('nav', opt);
   }
 
   toHTML() {

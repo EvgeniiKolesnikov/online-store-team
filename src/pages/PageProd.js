@@ -1,8 +1,6 @@
 import { Page } from '../core/Page';
 import { Cart } from '../components/cart/Cart';
 
-// import { Menu } from '../components/menu/Menu';
-
 export class PageProd extends Page {
   constructor(root, args) {
     super(root, {

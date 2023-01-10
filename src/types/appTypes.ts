@@ -44,6 +44,19 @@ export type PageOptions = {
   observer: Observer;
 };
 
+export type PageIndexOptions = {
+  // name: string;
+  listeners?: string[];
+  model: Model;
+  observer: Observer;
+};
+
+export type Page404Options = {
+  listeners?: string[];
+  model: Model;
+  observer: Observer;
+};
+
 export type CartType = {
   prods?: Prods[];
   prodsCount?: number;

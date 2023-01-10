@@ -1,7 +1,7 @@
 import { Page } from '../core/Page';
 import { Products } from '../components/products/Products';
 import { Cart } from '../components/cart/Cart';
-import { PageOptions } from '../types/appTypes';
+import { PageIndexOptions, PageOptions } from '../types/appTypes';
 import { Observer } from '../core/Observer';
 import { Model } from '../core/Model';
 
@@ -12,7 +12,7 @@ export class PageIndex extends Page {
 
   public model: Model;
 
-  constructor(root: HTMLElement | string, args: PageOptions) {
+  constructor(root: HTMLElement | string, args: PageIndexOptions) {
     super(root, {
       name: 'PageIndex',
       ...args,

@@ -3,7 +3,6 @@ import { Model } from '../core/Model';
 import { Observer } from '../core/Observer';
 import { Page } from '../core/Page';
 import { PageCartAgrs } from '../types/appTypes';
-// import { Menu } from '../components/menu/Menu';
 
 export class PageCart extends Page {
   model: Model;
@@ -24,7 +23,7 @@ export class PageCart extends Page {
 
   render(): void {
     const div = document.createElement('div');
-    div.classList.add('page');
+    div.classList.add('page__cart');
     div.innerHTML = this.toHTML();
     this.root.append(div);
 
@@ -37,11 +36,12 @@ export class PageCart extends Page {
   toHTML(): string {
     let list = '';
 
-    // if (this.model.cart?.prods) {
-    //   list = Object.keys(this.model.cart.prods)
-    //     .map((key) => `<div>id: ${key} count: ${this.model.cart.prods[key]}</div>`)
-    //     .join('');
-    // }
+    if (this.model.cart?.prods) {
+
+      // list = Object.keys(this.model.cart.prods)
+      //   .map((key) => `<div>id: ${key} count: ${this.model.cart.prods[key]}</div>`)
+      //   .join('');
+    }
 
     return `
     <header class="header">

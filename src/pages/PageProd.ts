@@ -5,8 +5,6 @@ import { Observer } from '../core/Observer';
 import { Model } from '../core/Model';
 import { Product } from '../types/dataTypes';
 
-// import { Menu } from '../components/menu/Menu';
-
 export class PageProd extends Page {
   observer: Observer;
 

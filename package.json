@@ -4,7 +4,7 @@
   "description": "online-store",
   "private": true,
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --config ./webpack.config.js --env mode=production",
     "dev": "webpack serve --env development",
     "lint": "eslint src"
   },

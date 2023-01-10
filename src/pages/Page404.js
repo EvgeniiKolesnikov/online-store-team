@@ -1,5 +1,4 @@
 import { Page } from '../core/Page';
-// import { Menu } from '../components/menu/Menu';
 
 export class Page404 extends Page {
   constructor(root, args) {
@@ -20,7 +19,6 @@ export class Page404 extends Page {
       observer: this.observer,
       model: this.model,
     };
-    // new Menu('nav', opt);
   }
 
   toHTML() {

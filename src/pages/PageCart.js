@@ -1,5 +1,4 @@
 import { Page } from '../core/Page';
-// import { Menu } from '../components/menu/Menu';
 
 export class PageCart extends Page {
   constructor(root, args) {
